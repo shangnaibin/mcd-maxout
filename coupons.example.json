@@ -1,0 +1,34 @@
+{
+  "_readme": "本地券 / 活动规则文件。couponCode 与 couponId 留空表示这是「活动规则」（买一送一、第二份半价这类没有券码的优惠），可以参与求最优方案，但不能拿去做官方核价；填入真实券码后，方案就会带上 couponCode 走 calculate-price 逐行核价。",
+  "_uses_readme": "uses 是这套券最多能用几次，决定了能不能靠「分开下单」把同一档优惠吃多次：1 = 只有一张（默认）；3 = 能拿到 3 张同款券，或用 3 次；0 或 \"unlimited\" = 不限次（只有纯活动才该这么写）。填了真实券码时 uses 恒为 1，因为一个券码只能核销一次。",
+  "coupons": [
+    {
+      "name": "11.9元麦辣鸡腿汉堡",
+      "kind": "fixed",
+      "target": "麦辣鸡腿汉堡",
+      "quantity": 1,
+      "price": 11.9,
+      "uses": 1,
+      "couponCode": "",
+      "couponId": ""
+    },
+    {
+      "name": "麦旋风买一送一",
+      "kind": "bogo",
+      "target": "麦旋风",
+      "uses": 3
+    },
+    {
+      "name": "脆薯饼第二份半价",
+      "kind": "half_second",
+      "target": "薯饼",
+      "uses": 2
+    },
+    {
+      "name": "免费脆薯饼",
+      "kind": "free",
+      "target": "薯饼",
+      "uses": 1
+    }
+  ]
+}
