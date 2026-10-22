@@ -2,6 +2,11 @@
 
 > 别问「100 块能吃什么」，问「100 块能吃几个」——给定预算，把一种餐品买到数学上的最多。
 
+**[👉 在线试用：https://shangnaibin.github.io/mcd-maxout/](https://shangnaibin.github.io/mcd-maxout/)**
+
+不用装、不用配 token，点开输入预算和想囤的餐品，立刻算出最多能买几个、怎么组合。
+页面里是同构的纯前端求解器，数据是某门店的真实菜单快照（含券与会员价）。
+
 给定一个预算和一种想囤的餐品，**算出最多能买几个、怎么组合、剩下几块钱还能塞点什么**。
 答案不是估的：菜单来自麦当劳 MCP `query-meals`，套餐结构来自 `query-meal-detail`，
 最终总价用官方 `calculate-price` 复核。
@@ -190,6 +195,23 @@ python -m maxout --store 1980241 --budget 100 --target-name 双层吉士 --html 
 | `--verify` | 调官方 `calculate-price` 复核总价（含券码时逐行核） |
 | `--html [路径]` | 生成可分享的单文件 HTML 报告，缺省写到 `out/` |
 | `--json` | 输出 JSON |
+
+## 网页版：点开就能用
+
+**在线版：<https://shangnaibin.github.io/mcd-maxout/>**（无需安装、无需 token）
+
+网页里跑的是**和 Python 完全同构的纯前端求解器**：同一套 Pareto 剪枝、分层 DP、券子集枚举，
+只是数据换成了导出时的门店快照。所以答案和命令行一致，但打开就能点。
+
+自己部署一份也很简单——先导出快照，再把产物丢到任何静态托管（GitHub Pages / Vercel / OSS）：
+
+```bash
+python -m maxout --store 1980241 --budget 100 --target-name 双层吉士 \
+  --coupons off --web out/web     # 产出 out/web/index.html + data.js
+```
+
+本仓库的在线版就放在 `gh-pages` 分支上（页面 + `data.js` + `.nojekyll`），
+好处是快照和代码同一个仓库、更新时只需替换这两个文件。
 
 ## 报告页：一张截图讲完整个方案
 
